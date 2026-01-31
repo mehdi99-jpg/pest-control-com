@@ -1,0 +1,349 @@
+/* ===================================
+   RESPONSIVE DESIGN
+   Mobile-First Approach
+   =================================== */
+
+/* ===================================
+   TABLET DEVICES (768px and below)
+   =================================== */
+@media (max-width: 968px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease;
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .nav-menu a {
+        font-size: 1.2rem;
+        color: var(--white) !important;
+    }
+    
+    .burger-menu {
+        display: block;
+        z-index: 1001;
+    }
+    
+    /* Hero Section */
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 8rem 1.5rem 4rem;
+        background-attachment: scroll;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Services */
+    .services {
+        padding: 4rem 0;
+    }
+    
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Why Choose Us */
+    .why-choose-us {
+        padding: 4rem 0;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-item {
+        padding: 1.5rem;
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Contact Section */
+    .contact {
+        padding: 4rem 0;
+    }
+    
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-form {
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    /* WhatsApp Button */
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.8rem;
+    }
+}
+
+/* ===================================
+   MOBILE DEVICES (480px and below)
+   =================================== */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    /* Header */
+    .logo img {
+        height: 50px;
+    }
+    
+    header.scrolled .logo img {
+        height: 45px;
+    }
+    
+    /* Hero */
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    /* Sections */
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+    
+    .services,
+    .why-choose-us,
+    .contact {
+        padding: 3rem 0;
+    }
+    
+    /* Cards */
+    .card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .card-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .card-icon i {
+        font-size: 2rem;
+    }
+    
+    .card h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Features */
+    .feature-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    
+    .feature-icon {
+        margin: 0 auto 1rem;
+    }
+    
+    /* Contact Form */
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    /* Info Items */
+    .info-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+    
+    /* WhatsApp Button */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.6rem;
+    }
+}
+
+/* ===================================
+   LANDSCAPE ORIENTATION (Mobile)
+   =================================== */
+@media (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 70vh;
+        padding: 6rem 1.5rem 3rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ===================================
+   EXTRA LARGE SCREENS (1400px and above)
+   =================================== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero h1 {
+        font-size: 4rem;
+    }
+    
+    .hero p {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+    }
+}
+
+/* ===================================
+   UTILITY RESPONSIVE CLASSES
+   =================================== */
+@media (max-width: 768px) {
+    .mobile-hidden {
+        display: none !important;
+    }
+    
+    .mobile-center {
+        text-align: center !important;
+    }
+    
+    .mobile-full-width {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .desktop-hidden {
+        display: none !important;
+    }
+}
+
+/* ===================================
+   ANIMATIONS FOR SMALLER SCREENS
+   =================================== */
+@media (max-width: 768px) {
+    [data-aos] {
+        transition-duration: 600ms !important;
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+@media print {
+    header,
+    .hero,
+    .whatsapp-float,
+    .contact {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .services,
+    .why-choose-us {
+        page-break-inside: avoid;
+    }
+}

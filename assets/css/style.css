@@ -326,6 +326,48 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
+/* Theme Toggle Button start gemini */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 15px;
+}
+
+.theme-toggle:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
+/* When header is scrolled, adjust button color */
+header.scrolled .theme-toggle {
+    border-color: var(--dark);
+    color: var(--dark);
+}
+
+header.scrolled .theme-toggle:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .theme-toggle {
+        margin: 10px auto;
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+}
+
 /* ===================================
    HEADER / NAVIGATION
    =================================== */
@@ -850,5 +892,544 @@ header.scrolled .burger-menu {
     }
     50% {
         box-shadow: 0 5px 30px rgba(37, 211, 102, 0.8);
+    }
+}
+
+
+/* ===================================
+   DARK MODE VARIABLES & OVERRIDES
+   =================================== */
+
+body.dark-mode {
+    /* Swap the background colors */
+    --light: #0f0f0f;         /* Main background becomes almost black */
+    --light-gray: #1a1a1a;    /* Secondary background becomes dark grey */
+    
+    /* Swap the text colors */
+    --dark: #f0f0f0;          /* Text becomes white */
+    --dark-gray: #b0b0b0;     /* Subtitles become light grey */
+    
+    /* Redefine White for Cards/Header */
+    /* We make "white" dark grey so cards don't blind the user */
+    --white: #1e212b;         
+    
+    /* Adjust Shadows to be more subtle on dark bg */
+    --shadow: rgba(0, 0, 0, 0.5);
+    --shadow-hover: rgba(0, 0, 0, 0.7);
+}
+
+/* Specific Fixes for Dark Mode */
+
+/* Fix Header Background on Scroll */
+body.dark-mode header.scrolled {
+    background: var(--white); /* Uses the new dark "white" variable */
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Fix Card Borders for better visibility */
+body.dark-mode .card,
+body.dark-mode .feature-item,
+body.dark-mode .info-item {
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Make input fields dark */
+body.dark-mode .form-group input,
+body.dark-mode .form-group select,
+body.dark-mode .form-group textarea {
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group select:focus,
+body.dark-mode .form-group textarea:focus {
+    background: #333;
+}
+
+/* Ensure Logo text or specific items invert if needed */
+body.dark-mode header.scrolled .nav-menu a {
+    color: var(--dark); /* Ensures nav links are visible on scroll */
+}
+
+/* Language Switcher & Theme Toggle Button in Dark Mode */
+body.dark-mode .theme-toggle,
+body.dark-mode .lang-switch {
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+}
+/* ... [All your existing Dark Mode code goes here] ... */
+
+/* Language Switcher & Theme Toggle Button in Dark Mode */
+body.dark-mode .theme-toggle,
+body.dark-mode .lang-switch {
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* ===================================
+   👇 PASTE THIS NEW CODE AT THE VERY BOTTOM 👇
+   DARK MODE FOOTER FIX
+   =================================== */
+body.dark-mode .footer {
+    background:rgba(255, 255, 255, 0.075) !important; /* Forces background to Black */
+    color: #ffffff !important;      /* Forces text to White */
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Fix links inside the footer in Dark Mode */
+body.dark-mode .footer a {
+    color: #cccccc !important; /* Light Grey links */
+}
+
+body.dark-mode .footer a:hover {
+    color: var(--accent) !important; /* Keep your red/orange hover color */
+}
+
+/* Fix the bottom copyright section */
+body.dark-mode .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+/* Fix H4 headings in the footer (Force them to be White) */
+body.dark-mode .footer-section h4 {
+    color: #ffffff !important;
+}
+
+/* Optional: Fix H3 headings if they aren't popping enough */
+body.dark-mode .footer-section h3 {
+    color: var(--accent) !important; /* Ensures title stays your accent color */
+}
+
+/* ===================================
+   FIXED SERVICE CARD STYLE
+   =================================== */
+.service-card {
+    position: relative; /* Essential for positioning the icon */
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: var(--transition);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    overflow: visible; /* Allows the icon to pop out if needed */
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.card-image {
+    height: 220px; /* Slightly taller for better look */
+    width: 100%;
+    position: relative;
+    overflow: hidden; /* Keeps the zoom effect inside */
+    border-radius: 12px 12px 0 0; /* Rounds only top corners */
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.service-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+/* FIX: Icon is now positioned relative to the CARD, not the image */
+.icon-overlay {
+    position: absolute;
+    top: 190px; /* 220px image height - 30px (half icon height) */
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10; /* Ensures it sits on top */
+}
+
+.card-content {
+    padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.card-content h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+
+.read-more {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease;
+    cursor: pointer; /* Ensures it looks clickable */
+}
+
+.read-more:hover {
+    gap: 15px;
+}
+
+/* FIX: Makes the link jump land correctly below the fixed header */
+#contact {
+    scroll-margin-top: 120px; /* Adjust based on your header height */
+}
+
+/* Google Logo Fix in Reviews */
+.g-icon {
+    font-size: 1.5rem;
+    color: #4285F4; /* Google Blue */
+    margin-left: auto;
+}
+
+/* ===================================
+   REVIEWS SECTION (Google Style)
+   =================================== */
+.reviews {
+    padding: 5rem 0;
+    background: var(--light);
+}
+
+.review-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.google-rating {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.google-rating span {
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #fbbc05; /* Google Star Yellow */
+}
+
+.stars i, .stars-small i {
+    color: #fbbc05;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.review-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.user-info h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--dark); /* Uses your variable */
+}
+
+.g-icon {
+    font-size: 1.5rem;
+    color: #4285F4; /* Google Blue */
+    margin-left: auto;
+}
+
+.review-text {
+    font-style: italic;
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ===================================
+   CONTACT & MAP SPLIT LAYOUT
+   =================================== */
+.contact-map-section {
+    width: 100%;
+}
+
+.split-layout {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 600px;
+}
+
+.contact-left {
+    flex: 1;
+    min-width: 400px;
+    background: var(--accent); /* Your Brand Red/Coral */
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.contact-right {
+    flex: 1;
+    min-width: 400px;
+    position: relative;
+    background: #e9e9e9;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.form-header p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.modern-form .input-group {
+    margin-bottom: 1rem;
+}
+
+.modern-form input, 
+.modern-form select, 
+.modern-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-submit {
+    background: var(--primary); /* Brand Blue */
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: var(--transition);
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.map-info-box {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 250px;
+}
+
+.map-info-box .info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.map-info-box i {
+    color: var(--accent);
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 768px) {
+    .split-layout {
+        flex-direction: column;
+    }
+    .contact-left {
+        padding: 3rem 1.5rem;
+        min-width: 100%;
+    }
+    .contact-right {
+        height: 400px;
+        min-width: 100%;
+    }
+}
+
+/* ===================================
+   SECTORS SECTION (Adapted to Site Colors)
+   =================================== */
+.sectors-section {
+    /* CHANGED: Green -> Your Primary Blue Gradient */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 5rem 0;
+    color: var(--white);
+    text-align: center;
+    position: relative;
+}
+
+/* Helper to force white text in this section */
+.text-white {
+    color: var(--white) !important;
+}
+
+/* Grid Layout for Circles */
+.sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+    justify-items: center;
+}
+
+.sector-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 200px;
+    cursor: pointer; /* Indicates interactivity */
+}
+
+/* Circular Images */
+.sector-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: var(--transition);
+}
+
+.sector-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* HOVER EFFECT: Border turns Red (Accent) */
+.sector-item:hover .sector-img {
+    transform: scale(1.05);
+    border-color: var(--accent); /* CHANGED: White -> Your Accent Red */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.sector-item:hover .sector-img img {
+    transform: scale(1.1);
+}
+
+.sector-item h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.sector-item:hover h3 {
+    color: var(--accent); /* Text turns red on hover */
+}
+
+/* Bottom CTA Area */
+.sectors-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.btn-white-pill {
+    background: var(--white);
+    color: var(--primary); /* CHANGED: Green Text -> Blue Text */
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-white-pill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    background: var(--accent); /* Hover Background -> Red */
+    color: var(--white);       /* Hover Text -> White */
+}
+
+.sectors-promise h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.sectors-promise p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--white);
+}
+
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    .sectors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    .sector-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectors-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

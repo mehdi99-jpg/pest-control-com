@@ -7,6 +7,26 @@
     --gray: #666;
 }
 
+/* Language Switcher Button */
+.lang-switch {
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333; /* Dark color for text */
+}
+
+.lang-switch:hover {
+    background-color: #054d24; /* Your primary Green */
+    color: white !important;
+    border-color: #054d24;
+}
+
 * {
     margin: 0;
     padding: 0;

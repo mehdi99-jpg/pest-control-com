@@ -381,3 +381,46 @@
         page-break-inside: avoid;
     }
 }
+
+/* ==============================================
+   FULL SCREEN MAP FOR MOBILE (Fix)
+   ============================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Force the Section to fill the screen */
+    .contact-map-section, 
+    .contact-map-section .split-layout {
+        height: 100vh !important; /* 100% of the screen height */
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    /* 2. Force the Map Container to fill the Section */
+    .contact-map-section .contact-right {
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 100vh !important; /* Ensures it never shrinks */
+    }
+
+    /* 3. Ensure the Google Maps Iframe takes all available space */
+    .contact-map-section iframe {
+        height: 100% !important;
+        width: 100% !important;
+        display: block;
+    }
+
+    /* 4. Adjust the floating Info Box so it sits nicely on mobile */
+    .map-info-box {
+        width: 90%;          /* Make it wide but with breathing room */
+        left: 5%;            /* Center it (5% + 90% + 5% = 100%) */
+        bottom: 80px;        /* Push it up so it's not hidden by phone navigation bars */
+        padding: 1rem;
+    }
+    
+    /* Optional: Ensure text inside info box is readable on small screens */
+    .map-info-box .info-row {
+        font-size: 0.9rem;
+    }
+}

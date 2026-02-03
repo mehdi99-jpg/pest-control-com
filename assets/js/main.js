@@ -499,7 +499,37 @@ console.log('%c🛡️ Home Shield - Pest Control Services', 'color: #0f3460; fo
 console.log('%cWebsite developed with modern web technologies', 'color: #666; font-size: 12px;');
 
 
+/* ===================================
+   DARK MODE TOGGLE
+   =================================== */
+const themeBtn = document.getElementById('theme-toggle');
+const body = document.body;
+const themeIcon = themeBtn.querySelector('i');
 
+// 1. Check if user already has a preference saved
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+}
+
+// 2. Button Click Event
+themeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    // Check if dark mode is active and update icon/storage
+    if (body.classList.contains('dark-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark'); // Save preference
+    } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light'); // Save preference
+    }
+});
 
 
 

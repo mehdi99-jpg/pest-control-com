@@ -138,16 +138,43 @@
         padding: 2rem 1.5rem;
     }
     
-    /* Footer */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
+  /* Footer */
+.footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+}
+
+.social-links {
+    justify-content: center;
+}
+
+/* Fix list items alignment on mobile */
+.footer-section ul li {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-section ul li a {
+    justify-content: center;
+}
+
+/* Fix coordonnées icons alignment */
+.footer-section ul li i {
+    margin-right: 0;
+}
+
+/* Fix footer bottom links wrapping */
+.footer-bottom p {
+    font-size: 0.8rem;
+    line-height: 1.8;
+}
+
+.footer-bottom a {
+    display: inline-block;
+}
     
     /* WhatsApp Button */
     .whatsapp-float {

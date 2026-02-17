@@ -583,59 +583,91 @@ header.scrolled .burger-menu {
 /* ===================================
    WHY CHOOSE US SECTION
    =================================== */
+
 .why-choose-us {
-    padding: 6rem 0;
-    background: var(--light-gray);
+    padding: 100px 0;
+    background-color: #f8fafc; /* Very light subtle gray */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.title-accent {
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 15px auto;
+    border-radius: 2px;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 10px;
 }
 
-.feature-item {
-    display: flex;
-    gap: 1.5rem;
-    padding: 2rem;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 3px 15px var(--shadow);
-    transition: var(--transition);
+.feature-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.03);
+    border-radius: 20px; /* Rounded modern corners */
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
 }
 
-.feature-item:hover {
-    transform: translateX(10px);
-    box-shadow: 0 8px 25px var(--shadow-hover);
+/* Suble hover lift */
+.feature-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    border-color: var(--primary);
 }
 
-.feature-icon {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    border-radius: 10px;
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background: rgba(var(--primary-rgb), 0.1); /* Assuming you have a primary RGB variable */
+    color: var(--primary);
+    border-radius: 50%; /* Circular icons look more "boutique" */
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto 25px;
+    transition: 0.3s ease;
 }
 
-.feature-icon i {
+.feature-card:hover .icon-wrapper {
+    background: var(--primary);
+    color: #fff;
+}
+
+.icon-wrapper i {
     font-size: 1.8rem;
-    color: var(--white);
 }
 
-.feature-content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary);
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b; /* Deep slate instead of pure black */
+    margin-bottom: 15px;
 }
 
-.feature-content p {
-    color: var(--dark-gray);
-    line-height: 1.6;
+.feature-card p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.7;
 }
 
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .why-choose-us {
+        padding: 60px 0;
+    }
+}
 /* ===================================
    CONTACT SECTION - MODERN DESIGN
    =================================== */
@@ -755,6 +787,45 @@ header.scrolled .burger-menu {
 .info-item p {
     font-size: 1rem;
     opacity: 0.9;
+}
+/*sucess and error message styles for contact */
+.form-success {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(46, 196, 182, 0.15);
+    border: 1px solid #2ec4b6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    color: #2ec4b6;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+.form-error {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(233, 69, 96, 0.15);
+    border: 1px solid #e94560;
+    border-radius: 10px;
+    padding: 15px 20px;
+    color: #e94560;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+.form-success i,
+.form-error i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ===================================
@@ -896,110 +967,7 @@ header.scrolled .burger-menu {
 }
 
 
-/* ===================================
-   DARK MODE VARIABLES & OVERRIDES
-   =================================== */
 
-body.dark-mode {
-    /* Swap the background colors */
-    --light: #0f0f0f;         /* Main background becomes almost black */
-    --light-gray: #1a1a1a;    /* Secondary background becomes dark grey */
-    
-    /* Swap the text colors */
-    --dark: #f0f0f0;          /* Text becomes white */
-    --dark-gray: #b0b0b0;     /* Subtitles become light grey */
-    
-    /* Redefine White for Cards/Header */
-    /* We make "white" dark grey so cards don't blind the user */
-    --white: #1e212b;         
-    
-    /* Adjust Shadows to be more subtle on dark bg */
-    --shadow: rgba(0, 0, 0, 0.5);
-    --shadow-hover: rgba(0, 0, 0, 0.7);
-}
-
-/* Specific Fixes for Dark Mode */
-
-/* Fix Header Background on Scroll */
-body.dark-mode header.scrolled {
-    background: var(--white); /* Uses the new dark "white" variable */
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Fix Card Borders for better visibility */
-body.dark-mode .card,
-body.dark-mode .feature-item,
-body.dark-mode .info-item {
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Make input fields dark */
-body.dark-mode .form-group input,
-body.dark-mode .form-group select,
-body.dark-mode .form-group textarea {
-    background: #2a2a2a;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-body.dark-mode .form-group input:focus,
-body.dark-mode .form-group select:focus,
-body.dark-mode .form-group textarea:focus {
-    background: #333;
-}
-
-/* Ensure Logo text or specific items invert if needed */
-body.dark-mode header.scrolled .nav-menu a {
-    color: var(--dark); /* Ensures nav links are visible on scroll */
-}
-
-/* Language Switcher & Theme Toggle Button in Dark Mode */
-body.dark-mode .theme-toggle,
-body.dark-mode .lang-switch {
-    color: #fff;
-    border-color: rgba(255,255,255,0.2);
-}
-/* ... [All your existing Dark Mode code goes here] ... */
-
-/* Language Switcher & Theme Toggle Button in Dark Mode */
-body.dark-mode .theme-toggle,
-body.dark-mode .lang-switch {
-    color: #fff;
-    border-color: rgba(255,255,255,0.2);
-}
-
-/* ===================================
-   👇 PASTE THIS NEW CODE AT THE VERY BOTTOM 👇
-   DARK MODE FOOTER FIX
-   =================================== */
-body.dark-mode .footer {
-    background:rgba(255, 255, 255, 0.075) !important; /* Forces background to Black */
-    color: #ffffff !important;      /* Forces text to White */
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Fix links inside the footer in Dark Mode */
-body.dark-mode .footer a {
-    color: #cccccc !important; /* Light Grey links */
-}
-
-body.dark-mode .footer a:hover {
-    color: var(--accent) !important; /* Keep your red/orange hover color */
-}
-
-/* Fix the bottom copyright section */
-body.dark-mode .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-/* Fix H4 headings in the footer (Force them to be White) */
-body.dark-mode .footer-section h4 {
-    color: #ffffff !important;
-}
-
-/* Optional: Fix H3 headings if they aren't popping enough */
-body.dark-mode .footer-section h3 {
-    color: var(--accent) !important; /* Ensures title stays your accent color */
-}
 
 /* ===================================
    FIXED SERVICE CARD STYLE

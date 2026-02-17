@@ -281,16 +281,14 @@ contactForm.addEventListener('submit', function(e) {
     // In production, you would send this data to your server
     
     // Show loading state
+    // Show loading state
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
+    submitButton.textContent = 'Envoi en cours...';
     submitButton.disabled = true;
     
     // Simulate API call with setTimeout
     setTimeout(function() {
-        // Success message
-        alert('Thank you for contacting us! We will get back to you within 24 hours.');
-        
         // Reset form
         contactForm.reset();
         
@@ -298,8 +296,6 @@ contactForm.addEventListener('submit', function(e) {
         submitButton.textContent = originalButtonText;
         submitButton.disabled = false;
         
-        // In a real application, you would handle the form data here
-        // Example: Send to WhatsApp, Email API, or your backend
         console.log('Form Data:', {
             name: name,
             phone: phone,
@@ -358,26 +354,21 @@ emailField.addEventListener('blur', function() {
 // ===================================
 // WHATSAPP INTEGRATION (OPTIONAL)
 // ===================================
-// Update the WhatsApp button to include pre-filled message
+// ===================================
+// WHATSAPP INTEGRATION
+// ===================================
 const whatsappButton = document.querySelector('.whatsapp-float');
 if (whatsappButton) {
     whatsappButton.addEventListener('click', function(e) {
         e.preventDefault();
         
-        // Your WhatsApp business number (replace with actual number)
-        const phoneNumber = '212XXXXXXXXX'; // Format: country code + number without + or spaces
-        
-        // Pre-filled message
-        const message = encodeURIComponent('Hello! I would like to inquire about your pest control services.');
-        
-        // WhatsApp URL
+        const phoneNumber = '212770073988'; 
+        const message = encodeURIComponent('Bonjour ! Je souhaite avoir des informations sur vos services.');
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
         
-        // Open WhatsApp in new tab
         window.open(whatsappUrl, '_blank');
     });
 }
-
 // ===================================
 // SCROLL TO TOP FUNCTIONALITY
 // ===================================
@@ -499,40 +490,42 @@ console.log('%c🛡️ Home Shield - Pest Control Services', 'color: #0f3460; fo
 console.log('%cWebsite developed with modern web technologies', 'color: #666; font-size: 12px;');
 
 
-/* ===================================
-   DARK MODE TOGGLE
-   =================================== */
-const themeBtn = document.getElementById('theme-toggle');
-const body = document.body;
-const themeIcon = themeBtn.querySelector('i');
+// automated email// automated emails
+const contactFormEmail = document.getElementById('contactForm');
 
-// 1. Check if user already has a preference saved
-const currentTheme = localStorage.getItem('theme');
+if (contactFormEmail) {
+    contactFormEmail.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-if (currentTheme === 'dark') {
-    body.classList.add('dark-mode');
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
+        const successDiv = document.getElementById('formSuccess');
+
+        emailjs.sendForm('service_paqc1my', 'template_bd5atng', this)
+            .then(function() {
+                // Show success
+                successDiv.className = 'form-success';
+                successDiv.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <p>Votre message a été envoyé avec succès ! Nous vous répondrons dans les 24 heures.</p>
+                `;
+                successDiv.style.display = 'flex';
+                contactFormEmail.reset();
+
+                // Hide after 5 seconds
+                setTimeout(function() {
+                    successDiv.style.display = 'none';
+                }, 5000);
+
+            }, function(error) {
+                // Show error
+                successDiv.className = 'form-error';
+                successDiv.innerHTML = `
+                    <i class="fas fa-times-circle"></i>
+                    <p>L'envoi a échoué. Veuillez réessayer ou nous contacter directement.</p>
+                `;
+                successDiv.style.display = 'flex';
+            });
+    });
 }
-
-// 2. Button Click Event
-themeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    
-    // Check if dark mode is active and update icon/storage
-    if (body.classList.contains('dark-mode')) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark'); // Save preference
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light'); // Save preference
-    }
-});
-
-
-
 
 
 

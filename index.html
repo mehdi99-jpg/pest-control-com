@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Services professionnels de lutte contre les nuisibles et les rongeurs au Maroc. Solutions rapides, sûres et efficaces.">
-    <title>Home Shield | Lutte contre les Nuisibles et Rongeurs</title>
+    <title>| Home Shield</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
@@ -14,7 +14,7 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="icon" type="image/png" href="assets/images/icon3.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 </head>
 <body>
 
@@ -184,54 +184,57 @@
             </div> </div> </section>
 
 
-    <section class="why-choose-us" id="about">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-down">Pourquoi Choisir Home Shield ?</h2>
-            <p class="section-subtitle" data-aos="fade-down" data-aos-delay="100">Votre partenaire de confiance en gestion parasitaire</p>
-            
-            <div class="features-grid">
-                <div class="feature-item" data-aos="fade-right">
-                    <div class="feature-icon">
+<section class="why-choose-us" id="about">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-aos="fade-up">Pourquoi Choisir Home Shield ?</h2>
+            <div class="title-accent"></div>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Votre partenaire de confiance en gestion parasitaire</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-inner">
+                    <div class="icon-wrapper">
                         <i class="fas fa-certificate"></i>
                     </div>
-                    <div class="feature-content">
-                        <h3>Professionnels Certifiés</h3>
-                        <p>Notre équipe est entièrement agréée et formée aux dernières techniques de lutte antiparasitaire.</p>
-                    </div>
+                    <h3>Professionnels Certifiés</h3>
+                    <p>Une équipe entièrement agréée et formée aux protocoles de lutte les plus rigoureux.</p>
                 </div>
-                
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="100">
-                    <div class="feature-icon">
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-inner">
+                    <div class="icon-wrapper">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <div class="feature-content">
-                        <h3>Solutions Écologiques</h3>
-                        <p>Nous utilisons des produits respectueux de l'environnement qui protègent votre famille et vos animaux de compagnie.</p>
-                    </div>
+                    <h3>Solutions Écologiques</h3>
+                    <p>Des traitements biosourcés pour protéger votre intérieur sans impacter l'environnement.</p>
                 </div>
-                
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="200">
-                    <div class="feature-icon">
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-inner">
+                    <div class="icon-wrapper">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <div class="feature-content">
-                        <h3>Service d'Urgence 24/7</h3>
-                        <p>Disponible 24h/24 pour les situations urgentes de lutte contre les nuisibles.</p>
-                    </div>
+                    <h3>Urgence 24h/7j</h3>
+                    <p>Parce que les nuisibles n'attendent pas, nos techniciens interviennent en un temps record.</p>
                 </div>
-                
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="300">
-                    <div class="feature-icon">
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="card-inner">
+                    <div class="icon-wrapper">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="feature-content">
-                        <h3>Satisfaction Garantie</h3>
-                        <p>Nous garantissons notre travail avec une garantie de satisfaction à 100%.</p>
-                    </div>
+                    <h3>Garantie Totale</h3>
+                    <p>Nous ne quittons les lieux que lorsque votre satisfaction est absolue et durable.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
     <section class="sectors-section" id="sectors">
@@ -398,9 +401,10 @@
                             <label for="service">Type de Service *</label>
                             <select id="service" name="service" required>
                                 <option value="">Sélectionnez un service</option>
-                                <option value="insect">Désinsectisation</option>
-                                <option value="rodent">Dératisation</option>
-                                <option value="disinfection">Désinfection</option>
+                                <option value="Désinsectisation">Désinsectisation</option>
+                                <option value="Dératisation">Dératisation</option>
+                                <option value="Désinfection">Désinfection</option>
+                                <option value="Dépigeonnisation">Dépigeonnisation</option>
                                 <option value="other">Autre</option>
                             </select>
                         </div>
@@ -409,6 +413,8 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="4"></textarea>
                         </div>
+
+                      <div id="formSuccess" style="display:none;"></div>
                         
                         <button type="submit" class="btn btn-primary btn-full">Envoyer le Message</button>
                     </form>
@@ -419,7 +425,7 @@
                         <i class="fas fa-phone"></i>
                         <div>
                             <h4>Appelez-nous</h4>
-                            <p>+212 660258377</p>
+                            <p>+212 770-073988</p>
                         </div>
                     </div>
                     
@@ -481,7 +487,7 @@
                     </div>
                     <div class="info-row">
                         <i class="fas fa-phone-alt"></i>
-                        <span>+212 660258377</span>
+                        <span>+212 770-073988</span>
                     </div>
                 </div>
             </div>
@@ -506,15 +512,17 @@
                     </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h4>Liens Rapides</h4>
-                    <ul>
-                        <li><a href="#home">Accueil</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">À Propos</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
+              <div class="footer-section">
+    <h4>Liens Rapides</h4>
+    <ul>
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#sectors">Secteurs</a></li>
+        <li><a href="#about">À Propos</a></li>
+        <li><a href="#reviews">Avis</a></li>
+        <li><a href="#contact">Devis Gratuit</a></li>
+    </ul>
+</div>
                 
                 <div class="footer-section">
                     <h4>Nos Services</h4>
@@ -545,17 +553,26 @@
 </div>
         </div>
     </footer>
-
-   <a href="https://wa.me/212660258377" class="whatsapp-float" target="_blank" data-aos="fade-left">
+<a href="https://wa.me/212770073988" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
-
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
     <script src="assets/js/main.js"></script>
+    
     <script>
     // Get the current year and inject it into the span with id="year"
       const currentYear = new Date().getFullYear();
-      document.getElementById('year').textContent = currentYear;</script>
+      document.getElementById('year').textContent = currentYear;
+      </script>
+
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("unV5bhcT6SuZHA2sM"); // Get this from your EmailJS Account settings
+   })();
+</script>
+
+
 </body>
 </html>

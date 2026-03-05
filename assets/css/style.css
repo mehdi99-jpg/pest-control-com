@@ -472,6 +472,48 @@ header.scrolled .burger-menu {
 }
 
 /* ===================================
+   FIXES FOR SUBPAGES 
+   =================================== */
+
+/* Fix 1: The "Retour aux services" link */
+.btn-back,
+.btn-back:visited,
+.btn-back:active {
+    color: var(--primary) !important; /* Keeps it your brand blue, no purple! */
+    text-decoration: none !important;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent !important;
+    padding: 0 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    color: var(--accent) !important; /* Turns red/coral on hover */
+    transform: translateX(-5px); /* Slides slightly to the left on hover */
+}
+
+/* Fix 2: Solid Header for Subpages */
+header.solid-nav {
+    background: var(--white) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+header.solid-nav .nav-menu a {
+    color: var(--dark) !important;
+}
+
+header.solid-nav .nav-menu a::after {
+    background: var(--accent) !important;
+}
+
+header.solid-nav .burger-menu {
+    color: var(--primary) !important;
+}
+
+/* ===================================
    SERVICES SECTION
    =================================== */
 .services {
@@ -579,6 +621,159 @@ header.scrolled .burger-menu {
     color: var(--secondary);
     font-size: 0.9rem;
 }
+/*modification for more details in the service*/
+/* Styles pour l'overlay au survol des services */
+.pest-list-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 52, 96, 0.92); /* var(--primary) avec opacité */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 5;
+}
+
+/* L'animation s'active quand on survole toute la carte */
+.service-card:hover .pest-list-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pest-list-overlay h4 {
+    color: var(--accent); /* Rouge coral */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.pest-list-overlay ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.pest-list-overlay ul li {
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pest-list-overlay ul li i {
+    color: var(--secondary); /* Vert d'eau */
+    font-size: 0.8rem;
+}
+
+/* ===================================
+   SERVICE DETAILS PAGE
+   =================================== */
+
+.service-details-main {
+    margin-top: 160px; /* Increased from 120px to clear the header */
+    padding-bottom: 80px;
+}
+
+.service-title {
+    text-align: left;
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.service-subtitle {
+    text-align: left;
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    margin-bottom: 3rem;
+}
+
+.service-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.service-text h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.service-text p {
+    color: var(--dark);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.pest-check-list {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 2.5rem;
+    padding: 0;
+}
+
+.pest-check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.pest-check-list li i {
+    color: var(--secondary); /* Uses the teal variable from your root */
+    margin-top: 5px; /* Aligns the icon perfectly with the text */
+    font-size: 1.1rem;
+}
+
+.service-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.service-image img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* Spacing utilities */
+.mt-2 { margin-top: 2rem; display: inline-block; }
+.mb-2 { margin-bottom: 2rem; display: inline-block; }
+
+/* Responsive adjustments for mobile and tablets */
+@media (max-width: 968px) {
+    .service-details-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    /* This moves the image above the text on small screens */
+    .service-image {
+        order: -1; 
+    }
+
+    .service-title {
+        font-size: 2rem;
+    }
+}
+
 
 /* ===================================
    WHY CHOOSE US SECTION

@@ -503,11 +503,7 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// ===================================
-// CONSOLE MESSAGE (OPTIONAL)
-// ===================================
-console.log('%c🛡️ Home Shield - Pest Control Services', 'color: #0f3460; font-size: 20px; font-weight: bold;');
-console.log('%cWebsite developed with modern web technologies', 'color: #666; font-size: 12px;');
+
 
 
 // automated email// automated emails
@@ -519,13 +515,54 @@ if (contactFormEmail) {
 
         const successDiv = document.getElementById('formSuccess');
 
+        // --- 1. CHECK FOR ERRORS BEFORE SENDING ---
+        const name = document.getElementById('name').value.trim();
+        const phoneInput = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const service = document.getElementById('service').value;
+        
+        const cleanPhone = phoneInput.replace(/[\s-]/g, '');
+        let errors = [];
+        
+        if (name.length < 2) {
+            errors.push("Veuillez entrer un nom valide.");
+        }
+        
+        const phoneRegex = /^(?:(?:\+|00)212|0)[5-7]\d{8}$/;
+        if (!phoneRegex.test(cleanPhone)) {
+            errors.push("Veuillez entrer un numéro marocain valide (ex: 0612345678).");
+        }
+        
+        if (email.length > 0) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errors.push("Veuillez entrer une adresse email valide.");
+            }
+        }
+        
+        if (service === '') {
+            errors.push("Veuillez sélectionner un type de service.");
+        }
+        
+        // --- 2. IF THERE ARE ERRORS, SHOW THEM AND STOP! ---
+        if (errors.length > 0) {
+            successDiv.className = 'form-error';
+            successDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                <div>${errors.join('<br>')}</div>
+            `;
+            successDiv.style.display = 'flex';
+            return; // THIS COMMAND STOPS EMAILJS FROM SENDING!
+        }
+
+        // --- 3. IF NO ERRORS, SEND THE EMAIL ---
         emailjs.sendForm('service_ckhwl17', 'template_bd5atng', this)
             .then(function() {
                 // Show success
                 successDiv.className = 'form-success';
                 successDiv.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <p>Votre message a été envoyé avec succès ! Nous vous répondrons dans les 24 heures.</p>
+                    <i class="fas fa-check-circle" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                    <p style="margin: 0;">Votre message a été envoyé avec succès ! Nous vous répondrons dans les 24 heures.</p>
                 `;
                 successDiv.style.display = 'flex';
                 contactFormEmail.reset();
@@ -539,16 +576,10 @@ if (contactFormEmail) {
                 // Show error
                 successDiv.className = 'form-error';
                 successDiv.innerHTML = `
-                    <i class="fas fa-times-circle"></i>
-                    <p>L'envoi a échoué. Veuillez réessayer ou nous contacter directement.</p>
+                    <i class="fas fa-times-circle" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                    <p style="margin: 0;">L'envoi a échoué. Veuillez réessayer ou nous contacter directement.</p>
                 `;
                 successDiv.style.display = 'flex';
             });
     });
 }
-
-
-
-
-
-

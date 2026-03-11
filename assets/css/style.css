@@ -1,6 +1,17 @@
-/* ===================================
-   HERO SLIDER SECTION - HORIZONTAL SLIDE
+
+   /* ===================================
+   HERO SLIDER TRANSITION FIX
    =================================== */
+.hero-slider,
+.slider-container {
+    background-color: #0f3460; /* Uses your brand's dark blue */
+    /* Alternatively, you can use black: background-color: #111; */
+}
+
+/* Ensure the slides don't flash transparent */
+.hero-slide {
+    background-color: #0f3460;
+}
 
 .hero-slider {
     position: relative;

@@ -225,87 +225,100 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===================================
-// FORM VALIDATION & SUBMISSION
+// FORM VALIDATION & SUBMISSION (UPDATED)
 // ===================================
 const contactForm = document.getElementById('contactForm');
+const messageContainer = document.getElementById('formMessage'); // Targets your empty div
 
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value.trim();
-    
-    // Validation flags
-    let isValid = true;
-    let errorMessage = '';
-    
-    // Validate name
-    if (name.length < 2) {
-        isValid = false;
-        errorMessage += 'Please enter a valid name.\n';
-    }
-    
-    // Validate phone (basic Moroccan phone validation)
-    const phoneRegex = /^(\+212|0)[5-7]\d{8}$/;
-    if (!phoneRegex.test(phone.replace(/[\s-]/g, ''))) {
-        isValid = false;
-        errorMessage += 'Please enter a valid Moroccan phone number (e.g., 0612345678 or +212612345678).\n';
-    }
-    
-    // Validate email (if provided)
-    if (email.length > 0) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            isValid = false;
-            errorMessage += 'Please enter a valid email address.\n';
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 1. Get form values
+        const name = document.getElementById('name').value.trim();
+        const phoneInput = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const service = document.getElementById('service').value;
+        
+        // Remove spaces and dashes from phone for validation
+        const cleanPhone = phoneInput.replace(/[\s-]/g, '');
+        
+        // 2. Check for errors
+        let errors = [];
+        
+        if (name.length < 2) {
+            errors.push("Veuillez entrer un nom valide.");
         }
-    }
-    
-    // Validate service selection
-    if (service === '') {
-        isValid = false;
-        errorMessage += 'Please select a service type.\n';
-    }
-    
-    // If validation fails, show error
-    if (!isValid) {
-        alert(errorMessage);
-        return;
-    }
-    
-    // If validation passes, simulate form submission
-    // In production, you would send this data to your server
-    
-    // Show loading state
-    // Show loading state
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-    submitButton.textContent = 'Envoi en cours...';
-    submitButton.disabled = true;
-    
-    // Simulate API call with setTimeout
-    setTimeout(function() {
-        // Reset form
-        contactForm.reset();
         
-        // Restore button
-        submitButton.textContent = originalButtonText;
-        submitButton.disabled = false;
+        const phoneRegex = /^(?:(?:\+|00)212|0)[5-7]\d{8}$/;
+        if (!phoneRegex.test(cleanPhone)) {
+            errors.push("Veuillez entrer un numéro marocain valide (ex: 0612345678).");
+        }
         
-        console.log('Form Data:', {
-            name: name,
-            phone: phone,
-            email: email,
-            service: service,
-            message: message
-        });
+        if (email.length > 0) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errors.push("Veuillez entrer une adresse email valide.");
+            }
+        }
         
-    }, 1500);
-});
+        if (service === '') {
+            errors.push("Veuillez sélectionner un type de service.");
+        }
+        
+        // 3. Show errors inside the form (NO ALERTS)
+        if (errors.length > 0) {
+            messageContainer.innerHTML = `
+                <div class="form-error" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding: 15px; border-radius: 8px; background-color: rgba(233, 69, 96, 0.1); border: 1px solid #e94560; color: #e94560;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 1.5rem;"></i>
+                    <div>${errors.join('<br>')}</div>
+                </div>
+            `;
+            return; // Stop here, don't send the email
+        }
+        
+        // 4. If no errors, prepare to send
+        messageContainer.innerHTML = '';
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Envoi en cours...';
+        submitButton.disabled = true;
+        
+        // 5. Send via EmailJS using your real keys
+        emailjs.sendForm('service_ckhwl17', 'template_bd5atng', this)
+            .then(function() {
+                // Show success message inline
+                messageContainer.innerHTML = `
+                    <div class="form-success" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding: 15px; border-radius: 8px; background-color: rgba(46, 196, 182, 0.1); border: 1px solid #2ec4b6; color: #2ec4b6;">
+                        <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+                        <div>Votre message a été envoyé avec succès ! Nous vous répondrons très vite.</div>
+                    </div>
+                `;
+                
+                contactForm.reset();
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+
+                // Remove the success message after 5 seconds
+                setTimeout(function() {
+                    messageContainer.innerHTML = '';
+                }, 5000);
+                
+            }, function(error) {
+                // Show EmailJS error inline
+                messageContainer.innerHTML = `
+                    <div class="form-error" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding: 15px; border-radius: 8px; background-color: rgba(233, 69, 96, 0.1); border: 1px solid #e94560; color: #e94560;">
+                        <i class="fas fa-times-circle" style="font-size: 1.5rem;"></i>
+                        <div>L'envoi a échoué. Veuillez réessayer ou nous contacter directement.</div>
+                    </div>
+                `;
+                console.error("EmailJS Error:", error);
+                
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            });
+    });
+}
 
 // ===================================
 // REAL-TIME FORM FIELD VALIDATION
@@ -317,43 +330,50 @@ const emailField = document.getElementById('email');
 // Add visual feedback for valid/invalid fields
 function addValidationFeedback(field, isValid) {
     if (isValid) {
-        field.style.borderColor = '#2ec4b6';
+        field.style.borderColor = '#2ec4b6'; // Teal (Success)
     } else {
-        field.style.borderColor = '#e94560';
+        field.style.borderColor = '#e94560'; // Red (Error)
     }
 }
 
-nameField.addEventListener('blur', function() {
-    const isValid = this.value.trim().length >= 2;
-    addValidationFeedback(this, isValid);
-});
+if (nameField) {
+    nameField.addEventListener('blur', function() {
+        const isValid = this.value.trim().length >= 2;
+        addValidationFeedback(this, isValid);
+    });
+}
 
-phoneField.addEventListener('blur', function() {
-    const phoneRegex = /^(\+212|0)[5-7]\d{8}$/;
-    const isValid = phoneRegex.test(this.value.replace(/[\s-]/g, ''));
-    addValidationFeedback(this, isValid);
-});
+if (phoneField) {
+    phoneField.addEventListener('blur', function() {
+        // Updated regex to exactly match the one used in form submission
+        const phoneRegex = /^(?:(?:\+|00)212|0)[5-7]\d{8}$/;
+        const isValid = phoneRegex.test(this.value.replace(/[\s-]/g, ''));
+        addValidationFeedback(this, isValid);
+    });
+}
 
-emailField.addEventListener('blur', function() {
-    if (this.value.trim().length === 0) {
-        this.style.borderColor = '';
-        return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = emailRegex.test(this.value);
-    addValidationFeedback(this, isValid);
-});
+if (emailField) {
+    emailField.addEventListener('blur', function() {
+        if (this.value.trim().length === 0) {
+            this.style.borderColor = ''; // Reset if empty (since it's not required)
+            return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailRegex.test(this.value);
+        addValidationFeedback(this, isValid);
+    });
+}
 
 // Reset border color on focus
 [nameField, phoneField, emailField].forEach(field => {
-    field.addEventListener('focus', function() {
-        this.style.borderColor = '';
-    });
+    if (field) {
+        field.addEventListener('focus', function() {
+            this.style.borderColor = '';
+        });
+    }
 });
 
-// ===================================
-// WHATSAPP INTEGRATION (OPTIONAL)
-// ===================================
+
 // ===================================
 // WHATSAPP INTEGRATION
 // ===================================
@@ -362,7 +382,7 @@ if (whatsappButton) {
     whatsappButton.addEventListener('click', function(e) {
         e.preventDefault();
         
-        const phoneNumber = '212770073988'; 
+        const phoneNumber = '212660258377'; 
         const message = encodeURIComponent('Bonjour ! Je souhaite avoir des informations sur vos services.');
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
         
@@ -499,7 +519,7 @@ if (contactFormEmail) {
 
         const successDiv = document.getElementById('formSuccess');
 
-        emailjs.sendForm('service_paqc1my', 'template_bd5atng', this)
+        emailjs.sendForm('service_ckhwl17', 'template_bd5atng', this)
             .then(function() {
                 // Show success
                 successDiv.className = 'form-success';
